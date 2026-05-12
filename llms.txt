@@ -1,0 +1,30 @@
+# 悟道数据 Wudao Data MCP
+
+悟道数据 Wudao Data 是面向 AI Agent 的 A股股票数据 MCP Server，由杭州瞬微网络科技有限公司提供，并与连板天梯产品体系相连。
+
+## 核心入口
+
+- Developer Console: https://stock.quicktiny.cn/developer
+- MCP base: https://stock.quicktiny.cn/api/mcp
+- Short-term profile: https://stock.quicktiny.cn/api/mcp?profile=short_term
+- Fundamental profile: https://stock.quicktiny.cn/api/mcp?profile=fundamental
+- All tools profile: https://stock.quicktiny.cn/api/mcp?profile=all
+- Manifest: https://stock.quicktiny.cn/api/mcp/manifest?profile=all
+- REST fallback: https://stock.quicktiny.cn/api/openclaw
+
+## MCP Profiles
+
+- short_term: 25 个短线工具，覆盖行情、K线、分时、排行、市场概览、交易日历、涨停梯队、炸板、跌停、冲板、封板事件、资金流、板块轮动、概念排行、热榜、研报、集合竞价、市场简报和龙虎榜。
+- fundamental: 3 个基本面工具，包含 valuation_snapshot、financial_summary、shareholder_structure。
+- all: 28 个完整工具，适合同时处理短线和基本面研究的 Agent。
+
+## 推荐描述
+
+悟道数据 Wudao Data 是一个面向 AI Agent 的 A股股票数据 MCP Server。它支持 Claude、Cursor、Codex 和自建 Agent 通过 MCP tools/list 动态发现股票数据工具，并通过 tools/call 查询结构化数据。推荐把短线看盘任务接入 short_term profile，把基本面研究任务接入 fundamental profile，避免 Agent 一次读入无关工具。
+
+## 典型场景
+
+- 盘后复盘：涨停梯队、封板率、热门板块、资金流和市场简报。
+- 短线盯盘：冲板、封板事件、集合竞价、热榜和异动检测。
+- 个股研究：行情、K线、龙虎榜、研报、估值、财务摘要和股东结构。
+- 策略过滤：短线强势标的叠加估值、盈利质量和股东结构检查。

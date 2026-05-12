@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>悟道数据 MCP Server - A股股票数据接入 AI Agent</title>
+  <meta name="description" content="悟道数据 MCP Server 面向 Claude、Cursor、Codex 和自建 AI Agent，提供 A股短线看盘、涨停梯队、资金板块、市场情报和基本面研究工具。">
+  <meta name="keywords" content="悟道数据,MCP Server,A股数据,股票数据MCP,AI Agent股票数据,Claude股票数据,Cursor股票数据,Codex股票数据">
+  <link rel="canonical" href="https://jcdreamjc.github.io/wudao-mcp/">
+  <meta property="og:title" content="悟道数据 MCP Server - A股股票数据接入 AI Agent">
+  <meta property="og:description" content="通过 MCP profile 将 A股短线工具和基本面工具拆分接入，让 AI Agent 稳定调用结构化股票数据。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jcdreamjc.github.io/wudao-mcp/">
+  <meta property="og:image" content="https://data.quicktiny.cn/og-wudao-data.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    :root {
+      --ink: #101828;
+      --muted: #5f6b7a;
+      --line: #d8dee8;
+      --soft: #f6f8fb;
+      --panel: #ffffff;
+      --red: #dc2626;
+      --red-dark: #991b1b;
+      --blue: #2563eb;
+      --green: #0f766e;
+      --amber: #b45309;
+      --shadow: 0 18px 48px rgba(16, 24, 40, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid rgba(216, 222, 232, 0.88);
+      backdrop-filter: blur(14px);
+    }
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 760;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: inline-grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, #ef4444, #b91c1c);
+    }
+    .brand small {
+      display: block;
+      margin-top: -4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 520;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    .nav-links a {
+      padding: 7px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #344054;
+    }
+    .nav-links a:hover { background: #fff1f2; color: var(--red-dark); }
+    .hero {
+      padding: 70px 0 52px;
+      background:
+        linear-gradient(180deg, rgba(255, 247, 247, 0.96), rgba(255, 255, 255, 0)),
+        radial-gradient(circle at 12% 0%, rgba(220, 38, 38, 0.13), transparent 30%),
+        radial-gradient(circle at 88% 18%, rgba(37, 99, 235, 0.10), transparent 28%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 430px;
+      gap: 44px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 6px 10px;
+      color: var(--red-dark);
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 0 0 18px;
+      max-width: 760px;
+      font-size: 54px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .lead {
+      margin: 0 0 28px;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .button.primary {
+      border-color: var(--red);
+      background: var(--red);
+      color: #fff;
+    }
+    .button.primary:hover { background: var(--red-dark); }
+    .proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: #415064;
+      font-size: 13px;
+    }
+    .proof span {
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+    }
+    .visual {
+      overflow: hidden;
+      border: 1px solid rgba(216, 222, 232, 0.95);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .visual img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1200 / 630;
+      object-fit: cover;
+    }
+    .quickstart {
+      background: #101828;
+      color: #f8fafc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .quickstart-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      color: #dbe7ff;
+      font-size: 13px;
+    }
+    pre {
+      margin: 0;
+      padding: 17px;
+      overflow: auto;
+      color: #e6edf7;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; }
+    .section { padding: 62px 0; }
+    .section.soft { background: var(--soft); }
+    .section-head { max-width: 760px; margin-bottom: 28px; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.3; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card, .tool-row {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
+    }
+    .card p, .tool-row p { margin-bottom: 0; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 760;
+      background: #eef4ff;
+      color: #1d4ed8;
+    }
+    .badge.red { background: #fff1f2; color: #b91c1c; }
+    .badge.green { background: #ecfdf5; color: #047857; }
+    .badge.amber { background: #fffbeb; color: #92400e; }
+    .profile-table, .tool-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    .profile-table th, .profile-table td, .tool-table th, .tool-table td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    .profile-table th, .tool-table th { background: #f8fafc; color: #334155; }
+    .profile-table tr:last-child td, .tool-table tr:last-child td { border-bottom: 0; }
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .tool-row code {
+      display: inline-block;
+      margin-bottom: 6px;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .doc-layout {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 36px;
+      align-items: start;
+    }
+    .side {
+      position: sticky;
+      top: 88px;
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    .side a {
+      padding: 8px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #344054;
+      font-size: 14px;
+    }
+    .side a:hover { background: #f1f5f9; }
+    .doc-content > * + h2 { margin-top: 44px; }
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-links { display: flex; gap: 14px; }
+    @media (max-width: 900px) {
+      .hero-grid, .doc-layout, .grid, .grid.two, .tools { grid-template-columns: 1fr; }
+      h1 { font-size: 38px; }
+      h2 { font-size: 26px; }
+      .visual { order: -1; }
+      .side { position: static; }
+      .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="悟道数据首页">
+        <span class="brand-mark">悟</span>
+        <span>悟道数据<small>Wudao Data MCP</small></span>
+      </a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#profiles">Profiles</a>
+        <a href="#tools">工具能力</a>
+        <a href="#config">接入配置</a>
+        <a href="#use-cases">应用场景</a>
+        <a href="https://stock.quicktiny.cn/developer">控制台</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">A股 MCP Server / AI Agent tools / 股票数据接口</div>
+          <h1>把 A股数据交给 AI Agent 稳定调用</h1>
+          <p class="lead">悟道数据 MCP Server 面向 Claude、Cursor、Codex 和自建 Agent，提供短线看盘、涨停梯队、资金板块、市场情报和基本面研究工具。Agent 通过 <code>tools/list</code> 发现 schema，再用 <code>tools/call</code> 获取结构化结果。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://stock.quicktiny.cn/developer">创建 API Key</a>
+            <a class="button" href="https://stock.quicktiny.cn/api/mcp/manifest?profile=all">查看 Manifest</a>
+          </div>
+          <div class="proof">
+            <span>short_term: 25 个短线工具</span>
+            <span>fundamental: 3 个基本面工具</span>
+            <span>all: 28 个完整工具</span>
+          </div>
+        </div>
+        <figure class="visual">
+          <img src="https://data.quicktiny.cn/og-wudao-data.png" alt="悟道数据 A股股票数据 MCP Server">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>为什么用 MCP</h2>
+          <p>MCP 让智能体不再依赖粘贴网页、手写接口说明或临时脚本。工具 schema、参数、调用结果和错误都通过统一协议暴露，适合持续运行的投研、复盘和监控工作流。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <span class="badge red">工具发现</span>
+            <h3>Agent 可以自己选工具</h3>
+            <p>支持 <code>initialize</code>、<code>tools/list</code>、<code>tools/call</code>。客户端能动态读取工具定义，减少 prompt 里硬塞接口文档。</p>
+          </article>
+          <article class="card">
+            <span class="badge">结构化结果</span>
+            <h3>返回数据更适合推理</h3>
+            <p>行情、梯队、资金、板块、财务和股东结构都以结构化 JSON 返回，方便 AI 汇总、比较、排序和继续调用。</p>
+          </article>
+          <article class="card">
+            <span class="badge green">统一权限</span>
+            <h3>和 REST 共用一套能力</h3>
+            <p>MCP、OpenClaw REST 和内部 Agent Chat 都来自同一套 Capability Registry，共用 API Key、权限、限流和调用统计。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="profiles">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>MCP Profiles</h2>
+          <p>工具不应该一次性全部塞给所有 Agent。悟道数据按 profile 拆分能力，让短线 Agent 保持专注，也让基本面研究可以单独接入。</p>
+        </div>
+        <table class="profile-table">
+          <thead>
+            <tr>
+              <th>Profile</th>
+              <th>Endpoint</th>
+              <th>工具数</th>
+              <th>适用方向</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>short_term</code></td>
+              <td><code>https://stock.quicktiny.cn/api/mcp?profile=short_term</code></td>
+              <td>25</td>
+              <td>短线看盘、涨停梯队、资金板块、异动检测、市场情报。默认不带 profile 时等同短线工具集。</td>
+            </tr>
+            <tr>
+              <td><code>fundamental</code></td>
+              <td><code>https://stock.quicktiny.cn/api/mcp?profile=fundamental</code></td>
+              <td>3</td>
+              <td>估值快照、财务摘要、股东结构。适合中线投研、质量过滤和基本面核验。</td>
+            </tr>
+            <tr>
+              <td><code>all</code></td>
+              <td><code>https://stock.quicktiny.cn/api/mcp?profile=all</code></td>
+              <td>28</td>
+              <td>需要一个 Agent 同时处理短线和基本面任务时使用。普通短线任务不建议默认使用全量。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="tools">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>工具能力</h2>
+          <p>当前能力分为行情、涨停板、资金分析、市场情报和基本面五组。工具名称就是 MCP <code>tools/call</code> 的 <code>name</code>。</p>
+        </div>
+        <div class="tools">
+          <article class="tool-row">
+            <span class="badge red">wudao-market</span>
+            <h3>市场与行情基础</h3>
+            <p><code>stock_search</code> <code>kline</code> <code>minute_data</code> <code>stock_rank</code> <code>market_overview</code> <code>trading_calendar</code></p>
+          </article>
+          <article class="tool-row">
+            <span class="badge red">wudao-limitup</span>
+            <h3>涨停板与情绪</h3>
+            <p><code>limit_up_ladder</code> <code>limit_up_filter</code> <code>limit_up_premium</code> <code>broken_limit_up</code> <code>limit_down</code> <code>approaching_limit_up</code> <code>limit_stats</code> <code>hot_sectors</code> <code>limit_events</code></p>
+          </article>
+          <article class="tool-row">
+            <span class="badge">wudao-analysis</span>
+            <h3>资金与板块分析</h3>
+            <p><code>anomaly_detection</code> <code>capital_flow</code> <code>sector_analysis</code> <code>concept_ranking</code> <code>concept_stocks</code></p>
+          </article>
+          <article class="tool-row">
+            <span class="badge green">wudao-intel</span>
+            <h3>市场情报</h3>
+            <p><code>smart_hotlist</code> <code>research_reports</code> <code>auction_data</code> <code>briefings</code> <code>dragon_tiger</code></p>
+          </article>
+          <article class="tool-row">
+            <span class="badge amber">wudao-fundamental</span>
+            <h3>基本面研究</h3>
+            <p><code>valuation_snapshot</code> 读取 PE、PB、PS、股息率、市值等估值快照；<code>financial_summary</code> 汇总营收、利润、ROE、毛利率和负债率；<code>shareholder_structure</code> 查询前十大股东和流通股东结构。</p>
+          </article>
+          <article class="tool-row">
+            <span class="badge">REST fallback</span>
+            <h3>HTTP API 兼容</h3>
+            <p>不支持 MCP 的环境可以走 <code>https://stock.quicktiny.cn/api/openclaw</code>。REST 与 MCP 使用同一套认证和能力注册。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="config">
+      <div class="wrap doc-layout">
+        <aside class="side" aria-label="文档目录">
+          <a href="#config">MCP 配置</a>
+          <a href="#calls">调用示例</a>
+          <a href="#rest">REST fallback</a>
+          <a href="#use-cases">应用场景</a>
+          <a href="#faq">FAQ</a>
+        </aside>
+        <div class="doc-content">
+          <h2>MCP 配置</h2>
+          <p>在连板天梯开发者控制台创建 API Key 后，将短线和基本面拆成两个 MCP server。Codex、Cursor、Claude Code 等支持 MCP 的客户端可以让 Agent 在工具发现层自行选择。</p>
+          <div class="quickstart">
+            <div class="quickstart-head"><span>mcp.json</span><span>profiles</span></div>
+            <pre><code>{
+  "mcpServers": {
+    "wudao-short-term": {
+      "url": "https://stock.quicktiny.cn/api/mcp?profile=short_term",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    },
+    "wudao-fundamental": {
+      "url": "https://stock.quicktiny.cn/api/mcp?profile=fundamental",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}</code></pre>
+          </div>
+
+          <h2 id="calls">协议调用示例</h2>
+          <div class="quickstart">
+            <div class="quickstart-head"><span>curl</span><span>JSON-RPC</span></div>
+            <pre><code># 查看 fundamental manifest
+curl -s "https://stock.quicktiny.cn/api/mcp/manifest?profile=fundamental"
+
+# 列出短线工具
+curl -s -X POST "https://stock.quicktiny.cn/api/mcp?profile=short_term" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $LB_API_KEY" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+
+# 调用基本面估值快照
+curl -s -X POST "https://stock.quicktiny.cn/api/mcp?profile=fundamental" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $LB_API_KEY" \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"valuation_snapshot","arguments":{"code":"贵州茅台"}}}'</code></pre>
+          </div>
+
+          <h2 id="rest">REST fallback</h2>
+          <p>如果当前客户端还不能接 MCP，可以把 API Key 放入环境变量，使用 OpenClaw REST 兼容入口。适合自动化脚本、内部服务和 CI 任务。</p>
+          <div class="quickstart">
+            <pre><code>export LB_API_KEY="YOUR_API_KEY"
+export LB_API_BASE="https://stock.quicktiny.cn/api/openclaw"
+
+curl -s -H "Authorization: Bearer $LB_API_KEY" \
+  "$LB_API_BASE/fundamental/valuation?code=600519"</code></pre>
+          </div>
+
+          <h2 id="use-cases">主要应用场景</h2>
+          <div class="grid two">
+            <article class="card"><h3>盘后复盘</h3><p>读取涨停梯队、封板率、热门板块、资金流和市场简报，让 Agent 输出市场情绪、主线题材和风险点。</p></article>
+            <article class="card"><h3>短线盯盘</h3><p>结合冲板、封板事件、集合竞价、热榜和异动检测，构建自动提醒或盘中观察列表。</p></article>
+            <article class="card"><h3>个股投研</h3><p>先用搜索和 K 线定位标的，再补充龙虎榜、研报、估值、财务摘要和股东结构，形成个股研究上下文。</p></article>
+            <article class="card"><h3>策略过滤</h3><p>短线强势信号之后再调用基本面 profile，过滤估值、盈利质量或股东结构明显异常的标的。</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>FAQ</h2>
+          <p>面向 GitHub Pages、搜索引擎和 AI 引用场景的简短说明。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>这是通用 MCP 框架吗？</h3>
+            <p>不是。它是股票投研垂直 MCP Server，核心优势是工具语义、字段和数据源围绕 A股投研设计，而不是让开发者自己把通用接口再包装成 Agent tool。</p>
+          </article>
+          <article class="card">
+            <h3>工具多会影响短线 Agent 吗？</h3>
+            <p>不会强制影响。推荐把短线任务接 <code>short_term</code> profile，把基本面任务接 <code>fundamental</code> profile。工具发现层只读对应集合。</p>
+          </article>
+          <article class="card">
+            <h3>怎么拿 API Key？</h3>
+            <p>进入 <a href="https://stock.quicktiny.cn/developer">连板天梯开发者控制台</a> 创建 API Key。请求头统一使用 <code>Authorization: Bearer YOUR_API_KEY</code>。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>© 2026 杭州瞬微网络科技有限公司 · 悟道数据 Wudao Data</div>
+      <div class="footer-links">
+        <a href="https://stock.quicktiny.cn/developer">Developer Console</a>
+        <a href="https://data.quicktiny.cn/">Wudao Data</a>
+        <a href="llms.txt">llms.txt</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
