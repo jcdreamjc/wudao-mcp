@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jcdreamjc.github.io/wudao-mcp/sitemap.xml

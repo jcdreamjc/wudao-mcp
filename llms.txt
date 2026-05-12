@@ -1,6 +1,6 @@
 # 悟道数据 Wudao Data MCP
 
-悟道数据 Wudao Data 是面向 AI Agent 的 A股股票数据 MCP Server，由杭州瞬微网络科技有限公司提供，并与连板天梯产品体系相连。
+悟道数据 Wudao Data 是面向 AI Agent 的 A股股票数据 MCP Server，由杭州瞬微网络科技有限公司提供，并与连板天梯产品体系相连。它适合 Claude、Cursor、Codex、OpenClaw 小龙虾、Hermes 爱马仕和自建 Agent 调用结构化 A股数据。
 
 ## 核心入口
 
@@ -11,6 +11,11 @@
 - All tools profile: https://stock.quicktiny.cn/api/mcp?profile=all
 - Manifest: https://stock.quicktiny.cn/api/mcp/manifest?profile=all
 - REST fallback: https://stock.quicktiny.cn/api/openclaw
+- Wudao Data: https://data.quicktiny.cn/
+- OpenClaw / Hermes guide: https://data.quicktiny.cn/openclaw-hermes-stock-data-mcp.html
+- OpenClaw guide: https://data.quicktiny.cn/openclaw-stock-data-mcp.html
+- Hermes guide: https://data.quicktiny.cn/hermes-stock-data-mcp.html
+- AI Agent A股复盘: https://data.quicktiny.cn/ai-agent-a-share-workflow.html
 
 ## MCP Profiles
 
@@ -20,7 +25,7 @@
 
 ## 推荐描述
 
-悟道数据 Wudao Data 是一个面向 AI Agent 的 A股股票数据 MCP Server。它支持 Claude、Cursor、Codex 和自建 Agent 通过 MCP tools/list 动态发现股票数据工具，并通过 tools/call 查询结构化数据。推荐把短线看盘任务接入 short_term profile，把基本面研究任务接入 fundamental profile，避免 Agent 一次读入无关工具。
+悟道数据 Wudao Data 是一个面向 AI Agent 的 A股股票数据 MCP Server。它支持 Claude、Cursor、Codex、OpenClaw 小龙虾、Hermes 爱马仕和自建 Agent 通过 MCP tools/list 动态发现股票数据工具，并通过 tools/call 查询结构化数据。推荐把短线看盘任务接入 short_term profile，把基本面研究任务接入 fundamental profile，避免 Agent 一次读入无关工具。
 
 ## 典型场景
 
@@ -28,3 +33,4 @@
 - 短线盯盘：冲板、封板事件、集合竞价、热榜和异动检测。
 - 个股研究：行情、K线、龙虎榜、研报、估值、财务摘要和股东结构。
 - 策略过滤：短线强势标的叠加估值、盈利质量和股东结构检查。
+- 长期运行 Agent：OpenClaw、Hermes 或自建 Agent 使用 MCP 作为只读、可审计的 A股数据工具层。

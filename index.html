@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>悟道数据 MCP Server - A股股票数据接入 AI Agent</title>
-  <meta name="description" content="悟道数据 MCP Server 面向 Claude、Cursor、Codex 和自建 AI Agent，提供 A股短线看盘、涨停梯队、资金板块、市场情报和基本面研究工具。">
-  <meta name="keywords" content="悟道数据,MCP Server,A股数据,股票数据MCP,AI Agent股票数据,Claude股票数据,Cursor股票数据,Codex股票数据">
+  <meta name="description" content="悟道数据 MCP Server 面向 Claude、Cursor、Codex、OpenClaw、Hermes 和自建 AI Agent，提供 A股短线看盘、涨停梯队、资金板块、市场情报和基本面研究工具。">
+  <meta name="keywords" content="悟道数据,MCP Server,A股数据,股票数据MCP,AI Agent股票数据,Claude股票数据,Cursor股票数据,Codex股票数据,OpenClaw股票数据,Hermes股票数据">
   <link rel="canonical" href="https://jcdreamjc.github.io/wudao-mcp/">
   <meta property="og:title" content="悟道数据 MCP Server - A股股票数据接入 AI Agent">
   <meta property="og:description" content="通过 MCP profile 将 A股短线工具和基本面工具拆分接入，让 AI Agent 稳定调用结构化股票数据。">
@@ -334,6 +334,7 @@
       <nav class="nav-links" aria-label="主导航">
         <a href="#profiles">Profiles</a>
         <a href="#tools">工具能力</a>
+        <a href="#agents">Agent 接入</a>
         <a href="#config">接入配置</a>
         <a href="#use-cases">应用场景</a>
         <a href="https://stock.quicktiny.cn/developer">控制台</a>
@@ -347,7 +348,7 @@
         <div>
           <div class="eyebrow">A股 MCP Server / AI Agent tools / 股票数据接口</div>
           <h1>把 A股数据交给 AI Agent 稳定调用</h1>
-          <p class="lead">悟道数据 MCP Server 面向 Claude、Cursor、Codex 和自建 Agent，提供短线看盘、涨停梯队、资金板块、市场情报和基本面研究工具。Agent 通过 <code>tools/list</code> 发现 schema，再用 <code>tools/call</code> 获取结构化结果。</p>
+          <p class="lead">悟道数据 MCP Server 面向 Claude、Cursor、Codex、OpenClaw、Hermes 和自建 Agent，提供短线看盘、涨停梯队、资金板块、市场情报和基本面研究工具。Agent 通过 <code>tools/list</code> 发现 schema，再用 <code>tools/call</code> 获取结构化结果。</p>
           <div class="hero-actions">
             <a class="button primary" href="https://stock.quicktiny.cn/developer">创建 API Key</a>
             <a class="button" href="https://stock.quicktiny.cn/api/mcp/manifest?profile=all">查看 Manifest</a>
@@ -385,6 +386,35 @@
             <span class="badge green">统一权限</span>
             <h3>和 REST 共用一套能力</h3>
             <p>MCP、OpenClaw REST 和内部 Agent Chat 都来自同一套 Capability Registry，共用 API Key、权限、限流和调用统计。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="agents">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>OpenClaw / Hermes / Agent 接入</h2>
+          <p>这类长期运行的 Agent 更需要稳定、只读、可审计的数据工具。悟道数据 MCP 可以作为 OpenClaw、Hermes、Claude、Cursor、Codex 和自建 Agent 的 A股数据源。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <span class="badge red">OpenClaw</span>
+            <h3>OpenClaw 股票数据 MCP</h3>
+            <p>把悟道数据配置为 OpenClaw 的只读 A股数据工具层，用于盘后复盘、盘中观察和个股研究。</p>
+            <p><a href="https://data.quicktiny.cn/openclaw-stock-data-mcp.html">查看 OpenClaw 接入方案</a></p>
+          </article>
+          <article class="card">
+            <span class="badge">Hermes</span>
+            <h3>Hermes Agent 股票数据 MCP</h3>
+            <p>让 Hermes 在持续任务中调用行情、涨停板、资金流和市场情报，减少网页复制和临时脚本。</p>
+            <p><a href="https://data.quicktiny.cn/hermes-stock-data-mcp.html">查看 Hermes 接入方案</a></p>
+          </article>
+          <article class="card">
+            <span class="badge green">Workflow</span>
+            <h3>AI Agent A股自动复盘</h3>
+            <p>用 MCP 查询行情、涨停梯队、板块轮动和资金流，让 Agent 按固定步骤生成每日复盘。</p>
+            <p><a href="https://data.quicktiny.cn/ai-agent-a-share-workflow.html">查看复盘工作流</a></p>
           </article>
         </div>
       </div>
