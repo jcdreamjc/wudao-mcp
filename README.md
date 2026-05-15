@@ -12,6 +12,10 @@ It provides structured, read-only tools for A-share market overview, K-line data
 - Manifest: https://stock.quicktiny.cn/api/mcp/manifest?profile=all
 - OpenClaw / Hermes guide: https://data.quicktiny.cn/openclaw-hermes-stock-data-mcp.html
 
+## Docs
+
+- OpenClaw / Hermes A-share review workflow: [docs/openclaw-hermes-a-share-review.md](docs/openclaw-hermes-a-share-review.md)
+
 ## Installation
 
 Create an API key in the Developer Console:

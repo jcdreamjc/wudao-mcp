@@ -16,6 +16,7 @@
 - OpenClaw guide: https://data.quicktiny.cn/openclaw-stock-data-mcp.html
 - Hermes guide: https://data.quicktiny.cn/hermes-stock-data-mcp.html
 - AI Agent A股复盘: https://data.quicktiny.cn/ai-agent-a-share-workflow.html
+- GitHub OpenClaw / Hermes A-share review workflow: https://github.com/jcdreamjc/wudao-mcp/blob/main/docs/openclaw-hermes-a-share-review.md
 
 ## MCP Profiles
 
