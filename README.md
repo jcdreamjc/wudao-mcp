@@ -1,18 +1,141 @@
-# 悟道数据 MCP
+# Wudao Data A-Share Stock MCP Server
 
-This repository hosts the public GitHub Pages site for Wudao Data MCP.
+Wudao Data is an A-share stock data MCP Server for OpenClaw, Hermes, Claude, Cursor, Codex and custom AI Agents.
 
-悟道数据 MCP 是面向 Claude、Cursor、Codex、OpenClaw、Hermes 和自建 AI Agent 的 A股股票数据 MCP Server，提供行情、涨停板、资金流、龙虎榜、研报和基本面工具。
+It provides structured, read-only tools for A-share market overview, K-line data, minute data, stock ranking, limit-up ladder, sector rotation, capital flow, Dragon Tiger List, research reports, valuation snapshots, financial summaries and post-market review workflows.
 
-- Website: https://jcdreamjc.github.io/wudao-mcp/
-- Wudao Data: https://data.quicktiny.cn/
+- Website: https://data.quicktiny.cn/
+- GitHub Pages: https://jcdreamjc.github.io/wudao-mcp/
 - Developer Console: https://stock.quicktiny.cn/developer
 - MCP endpoint: https://stock.quicktiny.cn/api/mcp
+- Streamable HTTP endpoint: https://stock.quicktiny.cn/api/mcp-stream
 - Manifest: https://stock.quicktiny.cn/api/mcp/manifest?profile=all
 - OpenClaw / Hermes guide: https://data.quicktiny.cn/openclaw-hermes-stock-data-mcp.html
 
+## Installation
+
+Create an API key in the Developer Console:
+
+```text
+https://stock.quicktiny.cn/developer
+```
+
+Then add Wudao Data as a Streamable HTTP MCP server.
+
+```json
+{
+  "mcpServers": {
+    "wudao-stock-data": {
+      "type": "streamableHttp",
+      "url": "https://stock.quicktiny.cn/api/mcp-stream",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
+
+If your MCP client does not support Streamable HTTP yet, use the JSON-RPC compatible endpoint:
+
+```json
+{
+  "mcpServers": {
+    "wudao-stock-data": {
+      "url": "https://stock.quicktiny.cn/api/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
+
+For Chinese setup instructions across Cursor, Codex CLI, Claude Code, OpenClaw, Hermes and generic MCP clients, see:
+
+```text
+https://stock.quicktiny.cn/api/mcp/setup
+```
+
+## OpenClaw / Hermes Submission Config
+
+Some MCP marketplaces request a wrapped config object. Use this version:
+
+```json
+{
+  "type": "streamableHttp",
+  "config": {
+    "mcpServers": {
+      "wudao-stock-data": {
+        "type": "streamableHttp",
+        "url": "https://stock.quicktiny.cn/api/mcp-stream",
+        "headers": {
+          "Authorization": "Bearer YOUR_API_KEY"
+        },
+        "params": {}
+      }
+    }
+  }
+}
+```
+
+## Skill
+
+This repository includes a market-friendly Skill guide:
+
+```text
+skills/wudao-stock-data/SKILL.md
+```
+
+The Skill explains when to use Wudao Data, how to configure the MCP server, how to verify `tools/list`, and how agents should choose tools for A-share market review tasks.
+
+## Available Tool Areas
+
+Wudao Data currently exposes tools across these areas:
+
+- Market data: stock search, K-line data, minute data, stock ranking, market overview, trading calendar
+- Limit-up ecosystem: limit-up ladder, limit-up filter, broken limit-up, limit-down, approaching limit-up, limit statistics, hot sectors, limit events
+- Capital flow and sectors: capital flow, sector analysis, concept ranking, concept stocks, anomaly detection
+- Market intelligence: smart hotlist, research reports, auction data, market briefings, Dragon Tiger List
+- Fundamentals: valuation snapshot, financial summary, shareholder structure
+- Workflows: market replay, stock research, limit-up review, theme research
+
+## Common Agent Tasks
+
+Wudao Data is useful when the user asks an AI Agent to:
+
+- Review today's A-share market after close
+- Analyze limit-up ladder and short-term sentiment
+- Find the strongest sectors and capital-flow themes
+- Summarize Dragon Tiger List and research-report context
+- Track watchlists and generate market observation notes
+- Compare A-share data workflows for OpenClaw, Hermes, Claude or Cursor
+
 ## Profiles
 
-- `short_term`: 25 A-share short-term trading and market intelligence tools.
-- `fundamental`: 3 fundamental research tools.
-- `all`: 28 tools in one profile.
+Profiles can be used to reduce the tool surface:
+
+- `short_term`: short-term trading and market intelligence tools
+- `fundamental`: valuation, financial summary and shareholder structure
+- `theme_research`: sector and concept research
+- `stock_research`: individual stock research
+- `workflows`: workflow-level tools only
+- `all`: all available tools
+
+Example:
+
+```text
+https://stock.quicktiny.cn/api/mcp-stream?profile=short_term
+```
+
+## Safety Boundary
+
+Wudao Data is a read-only data layer for AI Agent research, market review and observation workflows.
+
+It does not execute trades, place orders, provide investment advice or promise returns.
+
+## Tags
+
+```text
+mcp,stock,a-share,china-stock,market-data,ai-agent,openclaw,hermes,finance,research-data
+```
