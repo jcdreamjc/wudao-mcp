@@ -12,6 +12,14 @@ It provides structured, read-only tools for A-share market overview, K-line data
 - Manifest: https://stock.quicktiny.cn/api/mcp/manifest?profile=all
 - OpenClaw / Hermes guide: https://data.quicktiny.cn/openclaw-hermes-stock-data-mcp.html
 
+## MCP Directories
+
+Wudao Data is listed in several MCP directories and AI agent marketplaces:
+
+- Glama: https://glama.ai/mcp/servers/jcdreamjc/wudao-mcp
+- MCP.so: https://chat.mcp.so/server/wudao-a-share-stock-data-mcp/quicktiny
+- LobeHub: https://lobehub.com/zh/mcp/jcdreamjc-wudao-mcp
+
 ## Docs
 
 - OpenClaw / Hermes A-share review workflow: [docs/openclaw-hermes-a-share-review.md](docs/openclaw-hermes-a-share-review.md)
