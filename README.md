@@ -1,6 +1,6 @@
-# Wudao Data A-Share Stock MCP Server
+# Wudao A-Share Stock Data MCP
 
-Wudao Data is an A-share stock data MCP Server for OpenClaw, Hermes, Claude, Cursor, Codex and custom AI Agents.
+Wudao A-Share Stock Data MCP is a structured China A-share market data MCP Server for OpenClaw, Hermes, Claude, Cursor, Codex and custom AI Agents.
 
 It provides structured, read-only tools for A-share market overview, K-line data, minute data, stock ranking, limit-up ladder, sector rotation, capital flow, Dragon Tiger List, research reports, valuation snapshots, financial summaries and post-market review workflows.
 
@@ -14,7 +14,7 @@ It provides structured, read-only tools for A-share market overview, K-line data
 
 ## MCP Directories
 
-Wudao Data is listed in several MCP directories and AI agent marketplaces:
+Wudao A-Share Stock Data MCP is listed in several MCP directories and AI agent marketplaces:
 
 - Glama: https://glama.ai/mcp/servers/jcdreamjc/wudao-mcp
 - MCP.so: https://chat.mcp.so/server/wudao-a-share-stock-data-mcp/quicktiny
@@ -32,7 +32,7 @@ Create an API key in the Developer Console:
 https://stock.quicktiny.cn/developer
 ```
 
-Then add Wudao Data as a Streamable HTTP MCP server.
+Then add Wudao A-Share Stock Data MCP as a Streamable HTTP MCP server.
 
 ```json
 {
@@ -99,11 +99,11 @@ This repository includes a market-friendly Skill guide:
 skills/wudao-stock-data/SKILL.md
 ```
 
-The Skill explains when to use Wudao Data, how to configure the MCP server, how to verify `tools/list`, and how agents should choose tools for A-share market review tasks.
+The Skill explains when to use Wudao A-Share Stock Data MCP, how to configure the MCP server, how to verify `tools/list`, and how agents should choose tools for A-share market review tasks.
 
 ## Available Tool Areas
 
-Wudao Data currently exposes tools across these areas:
+Wudao A-Share Stock Data MCP currently exposes tools across these areas:
 
 - Market data: stock search, K-line data, minute data, stock ranking, market overview, trading calendar
 - Limit-up ecosystem: limit-up ladder, limit-up filter, broken limit-up, limit-down, approaching limit-up, limit statistics, hot sectors, limit events
@@ -114,7 +114,7 @@ Wudao Data currently exposes tools across these areas:
 
 ## Common Agent Tasks
 
-Wudao Data is useful when the user asks an AI Agent to:
+Wudao A-Share Stock Data MCP is useful when the user asks an AI Agent to:
 
 - Review today's A-share market after close
 - Analyze limit-up ladder and short-term sentiment
@@ -142,7 +142,7 @@ https://stock.quicktiny.cn/api/mcp-stream?profile=short_term
 
 ## Safety Boundary
 
-Wudao Data is a read-only data layer for AI Agent research, market review and observation workflows.
+Wudao A-Share Stock Data MCP is a read-only data layer for AI Agent research, market review and observation workflows.
 
 It does not execute trades, place orders, provide investment advice or promise returns.
 
