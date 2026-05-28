@@ -19,6 +19,7 @@ Wudao A-Share Stock Data MCP is listed in several MCP directories and AI agent m
 - Glama: https://glama.ai/mcp/servers/jcdreamjc/wudao-mcp
 - MCP.so: https://chat.mcp.so/server/wudao-a-share-stock-data-mcp/quicktiny
 - LobeHub: https://lobehub.com/zh/mcp/jcdreamjc-wudao-mcp
+- ModelScope MCP: https://www.modelscope.cn/mcp/servers/quicktiny/wudao-a-share-stock-data-mcp
 
 ## Docs
 
