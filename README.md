@@ -1,6 +1,6 @@
 # Wudao A-Share Stock Data MCP
 
-Wudao A-Share Stock Data MCP is a structured China A-share market data MCP Server for OpenClaw, Hermes, Claude, Cursor, Codex and custom AI Agents.
+Wudao A-Share Stock Data MCP is a structured China A-share market data MCP Server for WorkBuddy, OpenClaw, Hermes, Claude, Cursor, Codex and custom AI Agents.
 
 It provides structured, read-only tools for A-share market overview, K-line data, minute data, stock ranking, limit-up ladder, sector rotation, capital flow, Dragon Tiger List, research reports, valuation snapshots, financial summaries and post-market review workflows.
 
@@ -11,6 +11,7 @@ It provides structured, read-only tools for A-share market overview, K-line data
 - Streamable HTTP endpoint: https://stock.quicktiny.cn/api/mcp-stream
 - Manifest: https://stock.quicktiny.cn/api/mcp/manifest?profile=all
 - OpenClaw / Hermes guide: https://data.quicktiny.cn/openclaw-hermes-stock-data-mcp.html
+- WorkBuddy guide: https://data.quicktiny.cn/workbuddy-stock-data-mcp.html
 
 ## MCP Directories
 
@@ -64,7 +65,7 @@ If your MCP client does not support Streamable HTTP yet, use the JSON-RPC compat
 }
 ```
 
-For Chinese setup instructions across Cursor, Codex CLI, Claude Code, OpenClaw, Hermes and generic MCP clients, see:
+For Chinese setup instructions across WorkBuddy, Cursor, Codex CLI, Claude Code, OpenClaw, Hermes and generic MCP clients, see:
 
 ```text
 https://stock.quicktiny.cn/api/mcp/setup
@@ -122,7 +123,7 @@ Wudao A-Share Stock Data MCP is useful when the user asks an AI Agent to:
 - Find the strongest sectors and capital-flow themes
 - Summarize Dragon Tiger List and research-report context
 - Track watchlists and generate market observation notes
-- Compare A-share data workflows for OpenClaw, Hermes, Claude or Cursor
+- Compare A-share data workflows for WorkBuddy, OpenClaw, Hermes, Claude or Cursor
 
 ## Profiles
 
