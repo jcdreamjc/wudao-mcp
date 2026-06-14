@@ -9,7 +9,8 @@ It provides structured, read-only tools for A-share market overview, K-line data
 - Developer Console: https://stock.quicktiny.cn/developer
 - MCP endpoint: https://stock.quicktiny.cn/api/mcp
 - Streamable HTTP endpoint: https://stock.quicktiny.cn/api/mcp-stream
-- Manifest: https://stock.quicktiny.cn/api/mcp/manifest?profile=all
+- Manifest: https://stock.quicktiny.cn/api/mcp/manifest
+- Setup guide: https://stock.quicktiny.cn/api/mcp/setup
 - OpenClaw / Hermes guide: https://data.quicktiny.cn/openclaw-hermes-stock-data-mcp.html
 - WorkBuddy guide: https://data.quicktiny.cn/workbuddy-stock-data-mcp.html
 
@@ -105,14 +106,16 @@ The Skill explains when to use Wudao A-Share Stock Data MCP, how to configure th
 
 ## Available Tool Areas
 
-Wudao A-Share Stock Data MCP currently exposes tools across these areas:
+Wudao A-Share Stock Data MCP currently exposes 61 tools across these areas:
 
 - Market data: stock search, K-line data, minute data, stock ranking, market overview, trading calendar
 - Limit-up ecosystem: limit-up ladder, limit-up filter, broken limit-up, limit-down, approaching limit-up, limit statistics, hot sectors, limit events
 - Capital flow and sectors: capital flow, sector analysis, concept ranking, concept stocks, anomaly detection
-- Market intelligence: smart hotlist, research reports, auction data, market briefings, Dragon Tiger List
+- Market intelligence: smart hotlist, news hotlist, CLS news, research reports, auction data, market briefings, Dragon Tiger List
 - Fundamentals: valuation snapshot, financial summary, shareholder structure
 - Workflows: market replay, stock research, limit-up review, theme research
+- Events and official disclosures: company events, macro calendar, short-term catalysts, official announcements, investor interactions, SEC disclosures
+- Watchlist: personal watchlist lookup, grouping, tags and remarks
 
 ## Common Agent Tasks
 
@@ -130,9 +133,11 @@ Wudao A-Share Stock Data MCP is useful when the user asks an AI Agent to:
 Profiles can be used to reduce the tool surface:
 
 - `short_term`: short-term trading and market intelligence tools
-- `fundamental`: valuation, financial summary and shareholder structure
+- `auction_review`: opening auction review tools
 - `theme_research`: sector and concept research
 - `stock_research`: individual stock research
+- `market_replay`: market review tools
+- `personal` / `user`: personal watchlist tools
 - `workflows`: workflow-level tools only
 - `all`: all available tools
 

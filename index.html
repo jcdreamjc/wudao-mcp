@@ -8,7 +8,7 @@
   <meta name="keywords" content="悟道数据,MCP Server,A股数据,股票数据MCP,AI Agent股票数据,Claude股票数据,Cursor股票数据,Codex股票数据,OpenClaw股票数据,Hermes股票数据">
   <link rel="canonical" href="https://jcdreamjc.github.io/wudao-mcp/">
   <meta property="og:title" content="悟道数据 MCP Server - A股股票数据接入 AI Agent">
-  <meta property="og:description" content="通过 MCP profile 将 A股短线工具和基本面工具拆分接入，让 AI Agent 稳定调用结构化股票数据。">
+  <meta property="og:description" content="通过稳定 HTTP MCP Server 暴露 61 个 A股数据工具，让 AI Agent 稳定调用行情、涨停、资金、题材、事件日历、官方披露和工作流数据。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jcdreamjc.github.io/wudao-mcp/">
   <meta property="og:image" content="https://data.quicktiny.cn/og-wudao-data.png">
@@ -348,15 +348,16 @@
         <div>
           <div class="eyebrow">A股 MCP Server / AI Agent tools / 股票数据接口</div>
           <h1>把 A股数据交给 AI Agent 稳定调用</h1>
-          <p class="lead">悟道数据 MCP Server 面向 Claude、Cursor、Codex、OpenClaw、Hermes 和自建 Agent，提供短线看盘、涨停梯队、资金板块、市场情报和基本面研究工具。Agent 通过 <code>tools/list</code> 发现 schema，再用 <code>tools/call</code> 获取结构化结果。</p>
+          <p class="lead">悟道数据 MCP Server 面向 Claude、Cursor、Codex、OpenClaw、Hermes 和自建 Agent，提供 61 个 A股数据工具，覆盖行情、涨停梯队、集合竞价、题材热度、资金流向、公司事件/风险日历、宏观财经日历、短线催化日历、基本面、SEC 披露、工作流和自选股管理。Agent 通过 <code>tools/list</code> 发现 schema，再用 <code>tools/call</code> 获取结构化结果。</p>
           <div class="hero-actions">
             <a class="button primary" href="https://stock.quicktiny.cn/developer">创建 API Key</a>
-            <a class="button" href="https://stock.quicktiny.cn/api/mcp/manifest?profile=all">查看 Manifest</a>
+            <a class="button" href="https://stock.quicktiny.cn/api/mcp/manifest">查看 Manifest</a>
           </div>
           <div class="proof">
-            <span>short_term: 25 个短线工具</span>
-            <span>fundamental: 3 个基本面工具</span>
-            <span>all: 28 个完整工具</span>
+            <span>默认 61 个工具</span>
+            <span>稳定 HTTP MCP</span>
+            <span>3 个场景能力包</span>
+            <span>REST fallback</span>
           </div>
         </div>
         <figure class="visual">
@@ -424,35 +425,35 @@
       <div class="wrap">
         <div class="section-head">
           <h2>MCP Profiles</h2>
-          <p>工具不应该一次性全部塞给所有 Agent。悟道数据按 profile 拆分能力，让短线 Agent 保持专注，也让基本面研究可以单独接入。</p>
+          <p>默认推荐只接入一个稳定 MCP Server，由 Agent 根据用户问题自动选择工具。需要降低工具面或做专项工作流时，也可以使用 profile 收敛能力范围。</p>
         </div>
         <table class="profile-table">
           <thead>
             <tr>
               <th>Profile</th>
               <th>Endpoint</th>
-              <th>工具数</th>
+              <th>工具面</th>
               <th>适用方向</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>short_term</code></td>
+              <td><code>default / all</code></td>
+              <td><code>https://stock.quicktiny.cn/api/mcp</code></td>
+              <td>61 个工具</td>
+              <td>默认推荐入口。覆盖行情、涨停、资金、题材、公告互动、事件日历、集合竞价、SEC 披露、工作流和自选股管理。</td>
+            </tr>
+            <tr>
+              <td><code>workflows</code></td>
+              <td><code>https://stock.quicktiny.cn/api/mcp?profile=workflows</code></td>
+              <td>工作流工具</td>
+              <td>适合让 Agent 先跑市场复盘、个股研究、涨停复盘等高层工作流，再按需钻取原子数据。</td>
+            </tr>
+            <tr>
+              <td><code>short_term / stock_research / theme_research / auction_review</code></td>
               <td><code>https://stock.quicktiny.cn/api/mcp?profile=short_term</code></td>
-              <td>25</td>
-              <td>短线看盘、涨停梯队、资金板块、异动检测、市场情报。默认不带 profile 时等同短线工具集。</td>
-            </tr>
-            <tr>
-              <td><code>fundamental</code></td>
-              <td><code>https://stock.quicktiny.cn/api/mcp?profile=fundamental</code></td>
-              <td>3</td>
-              <td>估值快照、财务摘要、股东结构。适合中线投研、质量过滤和基本面核验。</td>
-            </tr>
-            <tr>
-              <td><code>all</code></td>
-              <td><code>https://stock.quicktiny.cn/api/mcp?profile=all</code></td>
-              <td>28</td>
-              <td>需要一个 Agent 同时处理短线和基本面任务时使用。普通短线任务不建议默认使用全量。</td>
+              <td>场景子集</td>
+              <td>用于短线看盘、个股研究、题材研究或集合竞价复盘等专项 Agent，减少无关工具暴露。</td>
             </tr>
           </tbody>
         </table>
@@ -463,7 +464,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2>工具能力</h2>
-          <p>当前能力分为行情、涨停板、资金分析、市场情报和基本面五组。工具名称就是 MCP <code>tools/call</code> 的 <code>name</code>。</p>
+          <p>当前能力覆盖 61 个 A股工具。工具名称就是 MCP <code>tools/call</code> 的 <code>name</code>，实际工具列表以 <code>tools/list</code> 和线上 manifest 为准。</p>
         </div>
         <div class="tools">
           <article class="tool-row">
@@ -484,12 +485,22 @@
           <article class="tool-row">
             <span class="badge green">wudao-intel</span>
             <h3>市场情报</h3>
-            <p><code>smart_hotlist</code> <code>research_reports</code> <code>auction_data</code> <code>briefings</code> <code>dragon_tiger</code></p>
+            <p><code>smart_hotlist</code> <code>news_hotlist</code> <code>cls_news</code> <code>research_reports</code> <code>auction_data</code> <code>briefings</code> <code>dragon_tiger</code></p>
           </article>
           <article class="tool-row">
             <span class="badge amber">wudao-fundamental</span>
             <h3>基本面研究</h3>
             <p><code>valuation_snapshot</code> 读取 PE、PB、PS、股息率、市值等估值快照；<code>financial_summary</code> 汇总营收、利润、ROE、毛利率和负债率；<code>shareholder_structure</code> 查询前十大股东和流通股东结构。</p>
+          </article>
+          <article class="tool-row">
+            <span class="badge amber">wudao-events</span>
+            <h3>事件日历与官方披露</h3>
+            <p>覆盖公司事件/风险日历、宏观财经日历、短线催化日历、巨潮公告、互动易/上证 e 互动问答、解禁、融资融券、北向持股和 SEC 披露。</p>
+          </article>
+          <article class="tool-row">
+            <span class="badge green">wudao-watchlist</span>
+            <h3>自选股与工作流</h3>
+            <p>支持个人自选股查看、分组、标签备注，以及市场复盘、个股研究、涨停复盘、题材研究等工作流级工具。</p>
           </article>
           <article class="tool-row">
             <span class="badge">REST fallback</span>
@@ -511,19 +522,13 @@
         </aside>
         <div class="doc-content">
           <h2>MCP 配置</h2>
-          <p>在连板天梯开发者控制台创建 API Key 后，将短线和基本面拆成两个 MCP server。Codex、Cursor、Claude Code 等支持 MCP 的客户端可以让 Agent 在工具发现层自行选择。</p>
+          <p>在连板天梯开发者控制台创建 API Key 后，推荐只配置一个稳定 HTTP MCP Server。Codex、Cursor、Claude Code 等支持 MCP 的客户端可以让 Agent 在工具发现层自行选择。</p>
           <div class="quickstart">
-            <div class="quickstart-head"><span>mcp.json</span><span>profiles</span></div>
+            <div class="quickstart-head"><span>mcp.json</span><span>stable http</span></div>
             <pre><code>{
   "mcpServers": {
-    "wudao-short-term": {
-      "url": "https://stock.quicktiny.cn/api/mcp?profile=short_term",
-      "headers": {
-        "Authorization": "Bearer YOUR_API_KEY"
-      }
-    },
-    "wudao-fundamental": {
-      "url": "https://stock.quicktiny.cn/api/mcp?profile=fundamental",
+    "wudao": {
+      "url": "https://stock.quicktiny.cn/api/mcp",
       "headers": {
         "Authorization": "Bearer YOUR_API_KEY"
       }
@@ -535,17 +540,17 @@
           <h2 id="calls">协议调用示例</h2>
           <div class="quickstart">
             <div class="quickstart-head"><span>curl</span><span>JSON-RPC</span></div>
-            <pre><code># 查看 fundamental manifest
-curl -s "https://stock.quicktiny.cn/api/mcp/manifest?profile=fundamental"
+            <pre><code># 查看 manifest
+curl -s "https://stock.quicktiny.cn/api/mcp/manifest"
 
-# 列出短线工具
-curl -s -X POST "https://stock.quicktiny.cn/api/mcp?profile=short_term" \
+# 列出工具
+curl -s -X POST "https://stock.quicktiny.cn/api/mcp" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $LB_API_KEY" \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
 
 # 调用基本面估值快照
-curl -s -X POST "https://stock.quicktiny.cn/api/mcp?profile=fundamental" \
+curl -s -X POST "https://stock.quicktiny.cn/api/mcp" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $LB_API_KEY" \
   -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"valuation_snapshot","arguments":{"code":"贵州茅台"}}}'</code></pre>
@@ -585,7 +590,7 @@ curl -s -H "Authorization: Bearer $LB_API_KEY" \
           </article>
           <article class="card">
             <h3>工具多会影响短线 Agent 吗？</h3>
-            <p>不会强制影响。推荐把短线任务接 <code>short_term</code> profile，把基本面任务接 <code>fundamental</code> profile。工具发现层只读对应集合。</p>
+            <p>默认入口会暴露完整能力，但 Agent 会根据用户问题选择合适工具。需要专项收敛时，可使用 <code>short_term</code>、<code>stock_research</code>、<code>theme_research</code>、<code>auction_review</code> 或 <code>workflows</code> profile。</p>
           </article>
           <article class="card">
             <h3>怎么拿 API Key？</h3>

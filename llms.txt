@@ -6,10 +6,12 @@
 
 - Developer Console: https://stock.quicktiny.cn/developer
 - MCP base: https://stock.quicktiny.cn/api/mcp
+- Stable HTTP MCP: https://stock.quicktiny.cn/api/mcp
+- Streamable HTTP MCP: https://stock.quicktiny.cn/api/mcp-stream
 - Short-term profile: https://stock.quicktiny.cn/api/mcp?profile=short_term
-- Fundamental profile: https://stock.quicktiny.cn/api/mcp?profile=fundamental
 - All tools profile: https://stock.quicktiny.cn/api/mcp?profile=all
-- Manifest: https://stock.quicktiny.cn/api/mcp/manifest?profile=all
+- Manifest: https://stock.quicktiny.cn/api/mcp/manifest
+- Setup guide: https://stock.quicktiny.cn/api/mcp/setup
 - REST fallback: https://stock.quicktiny.cn/api/openclaw
 - Wudao Data: https://data.quicktiny.cn/
 - OpenClaw / Hermes guide: https://data.quicktiny.cn/openclaw-hermes-stock-data-mcp.html
@@ -19,20 +21,24 @@
 - AI 自动复盘 A股说明: https://data.quicktiny.cn/ai-a-share-review.html
 - GitHub OpenClaw / Hermes A-share review workflow: https://github.com/jcdreamjc/wudao-mcp/blob/main/docs/openclaw-hermes-a-share-review.md
 
-## MCP Profiles
+## MCP Tools and Profiles
 
-- short_term: 25 个短线工具，覆盖行情、K线、分时、排行、市场概览、交易日历、涨停梯队、炸板、跌停、冲板、封板事件、资金流、板块轮动、概念排行、热榜、研报、集合竞价、市场简报和龙虎榜。
-- fundamental: 3 个基本面工具，包含 valuation_snapshot、financial_summary、shareholder_structure。
-- all: 28 个完整工具，适合同时处理短线和基本面研究的 Agent。
+- 默认/全量入口暴露 61 个 A股数据工具，覆盖行情、涨停梯队、集合竞价、题材热度、资金流向、公司事件/风险日历、宏观财经日历、短线催化日历、基本面、官方披露、SEC 披露、工作流和个人自选股管理。
+- 推荐默认只配置一个稳定 HTTP MCP Server：`https://stock.quicktiny.cn/api/mcp`。Agent 会通过 `tools/list` 动态发现工具，并根据用户问题选择需要调用的工具。
+- 可选 profile 包括 short_term、market_replay、stock_research、theme_research、auction_review、personal/user、workflows 和 all，用于专项 Agent 或降低工具面。
+- 场景能力包（Skill）有 3 个，用于集合竞价复盘、题材/板块研究、个股短线归因等复杂任务的工具编排。
 
 ## 推荐描述
 
-悟道数据 Wudao Data 是一个面向 AI Agent 的 A股股票数据 MCP Server。它支持 Claude、Cursor、Codex、OpenClaw 小龙虾、Hermes 爱马仕和自建 Agent 通过 MCP tools/list 动态发现股票数据工具，并通过 tools/call 查询结构化数据。推荐把短线看盘任务接入 short_term profile，把基本面研究任务接入 fundamental profile，避免 Agent 一次读入无关工具。
+悟道数据 Wudao Data 是一个面向 AI Agent 的 A股股票数据 MCP Server。它支持 Claude、Cursor、Codex、OpenClaw 小龙虾、Hermes 爱马仕和自建 Agent 通过 MCP tools/list 动态发现 61 个 A股数据工具，并通过 tools/call 查询结构化数据。推荐默认接入稳定 HTTP MCP Server；需要专项 Agent 时再按场景选择 profile。
 
 ## 典型场景
 
 - 盘后复盘：涨停梯队、封板率、热门板块、资金流和市场简报。
 - 短线盯盘：冲板、封板事件、集合竞价、热榜和异动检测。
 - 个股研究：行情、K线、龙虎榜、研报、估值、财务摘要和股东结构。
+- 官方核验：巨潮公告、互动易/上证 e 互动、公司事件/风险日历、SEC 披露。
+- 题材研究：概念排行、板块轮动、成分股、热榜关注和资金验证。
+- 自选股管理：查看、加入、移除、分组、标签备注和多分组归类。
 - 策略过滤：短线强势标的叠加估值、盈利质量和股东结构检查。
 - 长期运行 Agent：OpenClaw、Hermes 或自建 Agent 使用 MCP 作为只读、可审计的 A股数据工具层。
