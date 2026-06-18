@@ -1,6 +1,6 @@
 # OpenClaw / Hermes A-Share Market Review with Wudao Data MCP
 
-This document explains how OpenClaw, Hermes and other AI Agents can use Wudao Data MCP to generate A-share market reviews.
+This document explains how OpenClaw, Hermes, WorkBuddy, Codex and other AI Agents can use Wudao Data MCP to generate A-share market reviews.
 
 Wudao Data is a read-only A-share stock data MCP Server. It is designed for market research, post-market review, watchlist observation and structured data lookup. It does not execute trades or provide investment advice.
 
@@ -16,13 +16,7 @@ MCP is a better fit because the agent can discover tools with `tools/list`, call
 
 ## MCP Server
 
-Recommended Streamable HTTP endpoint:
-
-```text
-https://stock.quicktiny.cn/api/mcp-stream
-```
-
-JSON-RPC compatible endpoint:
+Recommended HTTP MCP endpoint:
 
 ```text
 https://stock.quicktiny.cn/api/mcp
@@ -41,22 +35,6 @@ https://stock.quicktiny.cn/api/mcp/setup
 ```
 
 ## Installation Config
-
-```json
-{
-  "mcpServers": {
-    "wudao-stock-data": {
-      "type": "streamableHttp",
-      "url": "https://stock.quicktiny.cn/api/mcp-stream",
-      "headers": {
-        "Authorization": "Bearer YOUR_API_KEY"
-      }
-    }
-  }
-}
-```
-
-If the MCP client does not support Streamable HTTP yet:
 
 ```json
 {
@@ -162,10 +140,10 @@ Help Hermes track my A-share watchlist and market themes.
 Use profiles to reduce tool surface:
 
 ```text
-https://stock.quicktiny.cn/api/mcp-stream?profile=short_term
-https://stock.quicktiny.cn/api/mcp-stream?profile=theme_research
-https://stock.quicktiny.cn/api/mcp-stream?profile=stock_research
-https://stock.quicktiny.cn/api/mcp-stream?profile=workflows
+https://stock.quicktiny.cn/api/mcp?profile=short_term
+https://stock.quicktiny.cn/api/mcp?profile=theme_research
+https://stock.quicktiny.cn/api/mcp?profile=stock_research
+https://stock.quicktiny.cn/api/mcp?profile=workflows
 ```
 
 For broad market review, start with the default or `short_term` profile.

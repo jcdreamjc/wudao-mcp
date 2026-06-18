@@ -11,19 +11,13 @@ metadata:
 
 # Wudao Data A-Share Stock MCP Skill
 
-Use this Skill when the user wants to connect OpenClaw, Hermes, Claude, Cursor, Codex or a custom AI Agent to A-share stock data.
+Use this Skill when the user wants to connect WorkBuddy, Codex, Claude, Cursor, OpenClaw, Hermes, Doubao/Coze-style workflows or a custom AI Agent to A-share stock data.
 
 Wudao Data is a read-only MCP Server for A-share market research and review workflows. It is designed for data lookup, market review, watchlist observation and research summaries. It does not execute trades or provide investment advice.
 
 ## MCP Server
 
-Recommended Streamable HTTP endpoint:
-
-```text
-https://stock.quicktiny.cn/api/mcp-stream
-```
-
-JSON-RPC compatible endpoint:
+Recommended HTTP MCP endpoint:
 
 ```text
 https://stock.quicktiny.cn/api/mcp
@@ -44,22 +38,6 @@ https://stock.quicktiny.cn/api/mcp/setup
 ## Installation
 
 Create an API key in the Developer Console, then configure the MCP client:
-
-```json
-{
-  "mcpServers": {
-    "wudao-stock-data": {
-      "type": "streamableHttp",
-      "url": "https://stock.quicktiny.cn/api/mcp-stream",
-      "headers": {
-        "Authorization": "Bearer YOUR_API_KEY"
-      }
-    }
-  }
-}
-```
-
-If the current client does not support Streamable HTTP, use:
 
 ```json
 {
@@ -86,6 +64,8 @@ Use Wudao Data for questions such as:
 - "Summarize Dragon Tiger List context for this stock."
 - "Generate an OpenClaw post-market review using A-share data."
 - "Help Hermes track my watchlist and market themes."
+- "What stock data source can I connect to my WorkBuddy or Codex Agent?"
+- "How can Doubao or Coze workflows query A-share market data?"
 
 ## Tool Areas
 
@@ -118,11 +98,11 @@ When MCP is not available:
 Optional profiles can reduce tool scope:
 
 ```text
-https://stock.quicktiny.cn/api/mcp-stream?profile=short_term
-https://stock.quicktiny.cn/api/mcp-stream?profile=fundamental
-https://stock.quicktiny.cn/api/mcp-stream?profile=theme_research
-https://stock.quicktiny.cn/api/mcp-stream?profile=stock_research
-https://stock.quicktiny.cn/api/mcp-stream?profile=workflows
+https://stock.quicktiny.cn/api/mcp?profile=short_term
+https://stock.quicktiny.cn/api/mcp?profile=fundamental
+https://stock.quicktiny.cn/api/mcp?profile=theme_research
+https://stock.quicktiny.cn/api/mcp?profile=stock_research
+https://stock.quicktiny.cn/api/mcp?profile=workflows
 ```
 
 ## Safety
