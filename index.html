@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>悟道数据 MCP Server - A股股票数据接入 WorkBuddy/Codex/AI Agent</title>
-  <meta name="description" content="悟道数据 MCP Server 面向 WorkBuddy、Codex、Claude、Cursor、豆包、扣子、OpenClaw、Hermes 和自建 AI Agent，提供 61 个 A股股票数据工具。">
+  <meta name="description" content="悟道数据 MCP Server 面向 WorkBuddy、Codex、Claude、Cursor、豆包、扣子、OpenClaw、Hermes 和自建 AI Agent，提供 67 个结构化 A股研究数据工具。">
   <meta name="keywords" content="悟道数据,MCP Server,A股数据,股票数据MCP,AI Agent股票数据,WorkBuddy股票数据,Codex股票数据,豆包股票数据,扣子股票数据,Claude股票数据,Cursor股票数据,OpenClaw股票数据,Hermes股票数据">
   <link rel="canonical" href="https://jcdreamjc.github.io/wudao-mcp/">
   <meta property="og:title" content="悟道数据 MCP Server - A股股票数据接入 AI Agent">
-  <meta property="og:description" content="通过稳定 HTTP MCP Server 暴露 61 个 A股数据工具，让 AI Agent 稳定调用行情、涨停、资金、题材、事件日历、官方披露和工作流数据。">
+  <meta property="og:description" content="通过稳定 HTTP MCP Server 暴露 67 个 A股数据工具，让 AI Agent 稳定调用行情、指数/ETF/转债、涨停、资金、题材、事件日历、官方披露和工作流数据。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jcdreamjc.github.io/wudao-mcp/">
   <meta property="og:image" content="https://data.quicktiny.cn/og-wudao-data.png">
@@ -349,14 +349,14 @@
         <div>
           <div class="eyebrow">A股 MCP Server / AI Agent tools / 股票数据接口</div>
           <h1>把 A股数据交给 AI Agent 稳定调用</h1>
-          <p class="lead">悟道数据 MCP Server 面向 WorkBuddy、Codex、Claude、Cursor、豆包、扣子、OpenClaw、Hermes 和自建 Agent，提供 61 个 A股数据工具，覆盖行情、涨停梯队、集合竞价、题材热度、资金流向、公司事件/风险日历、宏观财经日历、短线催化日历、基本面、SEC 披露、工作流和自选股管理。Agent 通过 <code>tools/list</code> 发现 schema，再用 <code>tools/call</code> 获取结构化结果。</p>
+          <p class="lead">悟道数据 MCP Server 面向 WorkBuddy、Codex、Claude、Cursor、豆包、扣子、OpenClaw、Hermes 和自建 Agent，提供 67 个 A股数据工具，覆盖股票行情、指数/ETF/可转债、涨停梯队、集合竞价、题材热度、资金流向、公司事件/风险日历、宏观财经日历、短线催化日历、基本面、官方披露、海外披露、工作流和自选股管理。Agent 通过 <code>tools/list</code> 发现 schema，再用 <code>tools/call</code> 获取结构化结果。</p>
           <div class="hero-actions">
             <a class="button primary" href="https://stock.quicktiny.cn/developer">创建 API Key</a>
             <a class="button" href="https://data.quicktiny.cn/agent-discovery.html">Agent 发现说明</a>
             <a class="button" href="https://stock.quicktiny.cn/api/mcp/manifest">查看 Manifest</a>
           </div>
           <div class="proof">
-            <span>默认 61 个工具</span>
+            <span>默认 67 个工具</span>
             <span>稳定 HTTP MCP</span>
             <span>3 个场景能力包</span>
             <span>REST fallback</span>
@@ -442,8 +442,8 @@
             <tr>
               <td><code>default / all</code></td>
               <td><code>https://stock.quicktiny.cn/api/mcp</code></td>
-              <td>61 个工具</td>
-              <td>默认推荐入口。覆盖行情、涨停、资金、题材、公告互动、事件日历、集合竞价、SEC 披露、工作流和自选股管理。</td>
+              <td>67 个工具</td>
+              <td>默认推荐入口。覆盖行情、指数/ETF/转债、涨停、资金、题材、公告互动、事件日历、集合竞价、海外披露、工作流和自选股管理。</td>
             </tr>
             <tr>
               <td><code>workflows</code></td>
@@ -466,13 +466,13 @@
       <div class="wrap">
         <div class="section-head">
           <h2>工具能力</h2>
-          <p>当前能力覆盖 61 个 A股工具。工具名称就是 MCP <code>tools/call</code> 的 <code>name</code>，实际工具列表以 <code>tools/list</code> 和线上 manifest 为准。</p>
+          <p>当前能力覆盖 67 个 A股工具。工具名称就是 MCP <code>tools/call</code> 的 <code>name</code>，实际工具列表以 <code>tools/list</code> 和线上 manifest 为准。</p>
         </div>
         <div class="tools">
           <article class="tool-row">
             <span class="badge red">wudao-market</span>
             <h3>市场与行情基础</h3>
-            <p><code>stock_search</code> <code>kline</code> <code>minute_data</code> <code>stock_rank</code> <code>market_overview</code> <code>trading_calendar</code></p>
+            <p><code>stock_search</code> <code>kline</code> <code>minute_data</code> <code>stock_rank</code> <code>market_overview</code> <code>trading_calendar</code> <code>index_market</code> <code>etf_market</code> <code>convertible_bond_market</code></p>
           </article>
           <article class="tool-row">
             <span class="badge red">wudao-limitup</span>
@@ -497,7 +497,7 @@
           <article class="tool-row">
             <span class="badge amber">wudao-events</span>
             <h3>事件日历与官方披露</h3>
-            <p>覆盖公司事件/风险日历、宏观财经日历、短线催化日历、巨潮公告、互动易/上证 e 互动问答、解禁、融资融券、北向持股和 SEC 披露。</p>
+            <p>覆盖公司事件/风险日历、宏观财经日历、短线催化日历、巨潮公告、互动易/上证 e 互动问答、解禁、融资融券、北向持股和海外官方披露。</p>
           </article>
           <article class="tool-row">
             <span class="badge green">wudao-watchlist</span>

@@ -1,7 +1,7 @@
 ---
 name: wudao-stock-data
 version: "1.0.0"
-description: "Use Wudao Data when an AI Agent needs read-only A-share market data through MCP: market overview, K-line data, limit-up ladder, sector rotation, capital flow, Dragon Tiger List, research reports and post-market review workflows."
+description: "Use Wudao Data when an AI Agent needs read-only A-share market data through MCP: market overview, stock/index/ETF/convertible-bond data, K-line data, limit-up ladder, sector rotation, capital flow, Dragon Tiger List, research reports and post-market review workflows."
 metadata:
   openclaw:
     emoji: "悟"
@@ -71,10 +71,10 @@ Use Wudao Data for questions such as:
 
 Wudao Data covers:
 
-- Market data: stock search, K-line data, minute data, market overview, trading calendar
+- Market data: stock search, K-line data, minute data, market overview, trading calendar, index market, ETF market and convertible-bond market
 - Limit-up ecosystem: limit-up ladder, limit-up filter, broken limit-up, limit-down, approaching limit-up, limit statistics, hot sectors
 - Capital flow and sectors: capital flow, sector analysis, concept ranking, concept stocks, anomaly detection
-- Market intelligence: smart hotlist, research reports, auction data, briefings, Dragon Tiger List
+- Market intelligence: smart hotlist, news hotlist, CLS news, research reports, auction data, briefings, Dragon Tiger List
 - Fundamentals: valuation snapshot, financial summary, shareholder structure
 - Workflows: market replay, stock research, limit-up review, theme research
 
