@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.jcdreamjc/wudao-mcp",
+  "title": "Wudao A-Share Stock Data MCP",
+  "description": "Read-only China A-share data for AI agents: market, limit-up, capital flow and disclosures.",
+  "version": "1.0.0",
+  "websiteUrl": "https://data.quicktiny.cn/",
+  "repository": {
+    "url": "https://github.com/jcdreamjc/wudao-mcp",
+    "source": "github",
+    "id": "1236094451"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://stock.quicktiny.cn/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer API key created in the Wudao Data developer console.",
+          "isRequired": true,
+          "isSecret": true,
+          "placeholder": "Bearer YOUR_API_KEY"
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "keywords": [
+        "A-share",
+        "China stock",
+        "market data",
+        "AI agent",
+        "WorkBuddy",
+        "Codex",
+        "OpenClaw",
+        "Hermes"
+      ],
+      "readOnly": true
+    }
+  }
+}
