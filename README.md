@@ -47,6 +47,7 @@ https://data.quicktiny.cn/agent-discovery.html
 
 Wudao A-Share Stock Data MCP is listed in several MCP directories and AI agent marketplaces:
 
+- Official MCP Registry: https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.jcdreamjc/wudao-mcp
 - Glama: https://glama.ai/mcp/servers/jcdreamjc/wudao-mcp
 - MCP.so: https://chat.mcp.so/server/wudao-a-share-stock-data-mcp/quicktiny
 - LobeHub: https://lobehub.com/zh/mcp/jcdreamjc-wudao-mcp
