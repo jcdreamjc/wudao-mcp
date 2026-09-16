@@ -1,0 +1,208 @@
+{
+  "testedAt": "2026-09-16T02:38:17.992353+00:00",
+  "method": "one sequential run, no retries added by harness",
+  "network": "direct",
+  "task": {
+    "codes": [
+      "600519",
+      "000001",
+      "300750"
+    ],
+    "dates": [
+      "2026-09-09",
+      "2026-09-10",
+      "2026-09-11",
+      "2026-09-14",
+      "2026-09-15"
+    ],
+    "adjust": "unadjusted",
+    "fields": [
+      "open",
+      "high",
+      "low",
+      "close"
+    ]
+  },
+  "limits": [
+    "Provider-maintained sample, not independent evaluation",
+    "No latency ranking or SLA conclusion",
+    "OHLC agreement is not independent proof of accuracy",
+    "No turnover, volume, or corporate-action comparison"
+  ],
+  "providers": {
+    "wudao": {
+      "status": "passed",
+      "request": {
+        "codes": [
+          "600519",
+          "000001",
+          "300750"
+        ],
+        "endDate": "2026-09-15",
+        "days": 5,
+        "maxRows": 5,
+        "adjust": "none"
+      },
+      "codesMatch": true,
+      "providerWarning": false,
+      "items": [
+        {
+          "code": "600519",
+          "rows": [
+            {
+              "date": "2026-09-09",
+              "open": 1305.01,
+              "high": 1309.3,
+              "low": 1286.68,
+              "close": 1290.88
+            },
+            {
+              "date": "2026-09-10",
+              "open": 1291,
+              "high": 1294.99,
+              "low": 1282,
+              "close": 1285.13
+            },
+            {
+              "date": "2026-09-11",
+              "open": 1285.15,
+              "high": 1286.15,
+              "low": 1263.01,
+              "close": 1275.16
+            },
+            {
+              "date": "2026-09-14",
+              "open": 1277.27,
+              "high": 1285.53,
+              "low": 1270.36,
+              "close": 1277.96
+            },
+            {
+              "date": "2026-09-15",
+              "open": 1281,
+              "high": 1284.5,
+              "low": 1271.28,
+              "close": 1272.75
+            }
+          ],
+          "issues": []
+        },
+        {
+          "code": "000001",
+          "rows": [
+            {
+              "date": "2026-09-09",
+              "open": 11.76,
+              "high": 11.79,
+              "low": 11.69,
+              "close": 11.7
+            },
+            {
+              "date": "2026-09-10",
+              "open": 11.68,
+              "high": 11.86,
+              "low": 11.66,
+              "close": 11.85
+            },
+            {
+              "date": "2026-09-11",
+              "open": 11.82,
+              "high": 11.86,
+              "low": 11.71,
+              "close": 11.74
+            },
+            {
+              "date": "2026-09-14",
+              "open": 11.73,
+              "high": 11.9,
+              "low": 11.72,
+              "close": 11.85
+            },
+            {
+              "date": "2026-09-15",
+              "open": 11.82,
+              "high": 11.88,
+              "low": 11.77,
+              "close": 11.82
+            }
+          ],
+          "issues": []
+        },
+        {
+          "code": "300750",
+          "rows": [
+            {
+              "date": "2026-09-09",
+              "open": 332.48,
+              "high": 337.66,
+              "low": 327.1,
+              "close": 336.84
+            },
+            {
+              "date": "2026-09-10",
+              "open": 335.9,
+              "high": 340.8,
+              "low": 330.5,
+              "close": 338.06
+            },
+            {
+              "date": "2026-09-11",
+              "open": 333.06,
+              "high": 335.66,
+              "low": 328.3,
+              "close": 330.51
+            },
+            {
+              "date": "2026-09-14",
+              "open": 334.51,
+              "high": 341.81,
+              "low": 334,
+              "close": 337.11
+            },
+            {
+              "date": "2026-09-15",
+              "open": 335,
+              "high": 335.73,
+              "low": 316,
+              "close": 316.36
+            }
+          ],
+          "issues": []
+        }
+      ]
+    },
+    "akshare": {
+      "status": "check_failed",
+      "version": "1.18.94",
+      "entry": "stock_zh_a_hist",
+      "adjust": "",
+      "items": [
+        {
+          "code": "600519",
+          "rows": [],
+          "issues": [
+            "ProxyError"
+          ]
+        },
+        {
+          "code": "000001",
+          "rows": [],
+          "issues": [
+            "ProxyError"
+          ]
+        },
+        {
+          "code": "300750",
+          "rows": [],
+          "issues": [
+            "ProxyError"
+          ]
+        }
+      ]
+    }
+  },
+  "comparison": {
+    "status": "not_comparable",
+    "reason": "both_providers_must_pass_first"
+  }
+}

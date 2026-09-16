@@ -55,6 +55,7 @@ Wudao A-Share Stock Data MCP is listed in several MCP directories and AI agent m
 
 ## Docs
 
+- Reproducible source check (3 stocks, 5 trading days): [script, observed results and limitations](examples/source-check/README.md). Maintainer-run evidence, including failed requests; not an independent ranking.
 - OpenClaw / Hermes A-share review workflow: [docs/openclaw-hermes-a-share-review.md](docs/openclaw-hermes-a-share-review.md)
 
 ## Installation
