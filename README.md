@@ -5,7 +5,7 @@ Wudao A-Share Stock Data MCP (悟道 A股股票数据 MCP) is a remote HTTP MCP 
 It is maintained by 杭州瞬微网络科技有限公司 (QuickTiny) and shares accounts with 连板天梯. The facts below were checked against the live manifest on 2026-10-06; the manifest and `tools/list` are authoritative.
 
 - Endpoint: `https://stock.quicktiny.cn/api/mcp` (Streamable HTTP, stateless JSON-RPC over POST; no stdio)
-- Auth: `Authorization: Bearer YOUR_API_KEY`, with a key from the [developer console](https://stock.quicktiny.cn/developer)
+- Auth: `Authorization: Bearer YOUR_API_KEY`, with a key from the [developer console](https://stock.quicktiny.cn/developer); gateways that reserve `Authorization` (for example Smithery) can send the same key as `X-API-Key: YOUR_API_KEY`
 - Manifest: https://stock.quicktiny.cn/api/mcp/manifest
 - Docs: [client setup](https://data.quicktiny.cn/docs.html#clients) · [tool catalog](https://data.quicktiny.cn/stock-data-mcp.html#tools) · [pricing and limits](https://data.quicktiny.cn/pricing.html) · [product facts](https://data.quicktiny.cn/agent-discovery.html)
 - Not affiliated with Tushare
