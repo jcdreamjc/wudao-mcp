@@ -1,0 +1,19 @@
+{
+  "title": "连接悟道 A股数据",
+  "title_en": "Connect Wudao A-Share Data",
+  "description": "填写在悟道开发者控制台创建的 API Key，凭证只保存在本机 ~/.workbuddy 目录。免费 Key 每天 50 次工具调用，北京时间 09:15–10:30 暂停 MCP 调用。",
+  "description_en": "Enter an API key created in the Wudao developer console. It is stored only on this computer under ~/.workbuddy. Free keys allow 50 tool calls a day and pause MCP calls from 09:15 to 10:30 Beijing time.",
+  "docUrl": "https://data.quicktiny.cn/workbuddy-stock-data-mcp.html",
+  "docLabel": "如何获取悟道 API Key？",
+  "fields": [
+    {
+      "key": "WUDAO_API_KEY",
+      "label": "悟道 API Key",
+      "label_en": "Wudao API Key",
+      "type": "password",
+      "required": true,
+      "placeholder": "以 lb_ 开头，在 stock.quicktiny.cn/developer 创建",
+      "description": "悟道的数据访问密钥，不是模型服务商的 Key。"
+    }
+  ]
+}

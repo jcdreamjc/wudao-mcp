@@ -1,0 +1,27 @@
+{
+  "name": "Wudao A-Share Data",
+  "name_zh": "悟道 A股数据",
+  "name_en": "Wudao A-Share Data",
+  "description": "A-share data for market reviews: limit-up ladder, themes, capital flow, call auctions, Dragon Tiger List and event calendars.",
+  "description_zh": "查询 A股行情、涨停梯队、题材资金、集合竞价、龙虎榜和事件日历，生成有数据日期和出处的盘后复盘。",
+  "description_en": "Query A-share quotes, limit-up ladders, themes, capital flow, call auctions and event calendars to build dated, sourced market reviews.",
+  "source": "wudao-a-share-stock-data",
+  "type": "mcp",
+  "version": "1.0.0",
+  "auth_mode": "token",
+  "minWorkbuddyVersion": "4.24.0",
+  "examples_zh": [
+    "复盘今天的 A股：涨跌停数量、连板梯队和最强题材",
+    "明天开盘前，看看集合竞价里最强的题材和个股",
+    "查一下 600519 最近一个月的 K 线和资金流",
+    "未来一周有哪些解禁、财报披露和行业大会",
+    "把今天连板最高的几只股票加入我的自选股"
+  ],
+  "examples_en": [
+    "Review today's A-share market: limit-up and limit-down counts, the board ladder and the strongest themes",
+    "Before tomorrow's open, show the strongest themes and stocks in the call auction",
+    "Show 600519's K-line and capital flow for the past month",
+    "List unlocks, earnings dates and industry events for the next week",
+    "Add today's highest consecutive limit-up stocks to my watchlist"
+  ]
+}

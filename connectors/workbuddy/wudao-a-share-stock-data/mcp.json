@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "wudao-stock-data": {
+      "type": "streamableHttp",
+      "url": "https://stock.quicktiny.cn/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${WUDAO_API_KEY}"
+      },
+      "timeout": 30000
+    }
+  }
+}
