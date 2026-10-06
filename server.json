@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.jcdreamjc/wudao-mcp",
   "title": "Wudao A-Share Stock Data MCP",
-  "description": "Remote HTTP MCP with 63 read-only China A-share tools for AI agents, automatic market review and structured research.",
-  "version": "1.0.1",
+  "description": "China A-share data for AI agents: 57 read-only tools plus 6 tools for your own watchlist.",
+  "version": "1.1.0",
   "websiteUrl": "https://data.quicktiny.cn/",
   "repository": {
     "url": "https://github.com/jcdreamjc/wudao-mcp",
@@ -37,7 +37,10 @@
         "OpenClaw",
         "Hermes"
       ],
-      "readOnly": true
+      "readOnly": false,
+      "readOnlyToolCount": 57,
+      "writeToolCount": 6,
+      "writeScope": "caller's own watchlist only; no trade execution"
     }
   }
 }

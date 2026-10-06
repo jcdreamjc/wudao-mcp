@@ -2,7 +2,7 @@
 
 This document explains how OpenClaw, Hermes, WorkBuddy, Codex and other AI Agents can use Wudao Data MCP to generate A-share market reviews.
 
-Wudao Data is a read-only A-share stock data MCP Server. It is designed for market research, post-market review, watchlist observation and structured data lookup. It does not execute trades or provide investment advice.
+Wudao Data is an A-share stock data MCP Server (57 read-only tools plus 6 tools for the caller's own watchlist). It is designed for market research, post-market review, watchlist observation and structured data lookup. It does not execute trades or provide investment advice.
 
 ## Why AI Agents Need Structured A-Share Data
 
@@ -51,7 +51,7 @@ https://stock.quicktiny.cn/api/mcp/setup
 
 ## OpenClaw Review Workflow
 
-An OpenClaw agent can use Wudao Data as a read-only data layer for daily post-market review.
+An OpenClaw agent can use Wudao Data as the data layer for daily post-market review.
 
 Recommended prompt:
 
@@ -163,8 +163,8 @@ It is not designed for trade execution, order placement, investment advice or re
 ## Related Links
 
 - Wudao Data website: https://data.quicktiny.cn/
-- OpenClaw / Hermes landing page: https://data.quicktiny.cn/openclaw-hermes-stock-data-mcp.html
-- OpenClaw A-share review page: https://data.quicktiny.cn/openclaw-a-share-review.html
-- Hermes A-share review page: https://data.quicktiny.cn/hermes-a-share-review.html
+- OpenClaw / Hermes landing page: https://data.quicktiny.cn/docs.html#openclaw-hermes
+- OpenClaw A-share review page: https://data.quicktiny.cn/ai-agent-a-share-workflow.html
+- Hermes A-share review page: https://data.quicktiny.cn/stock-data-mcp.html#tasks
 - Developer Console: https://stock.quicktiny.cn/developer
 - MCP setup guide: https://stock.quicktiny.cn/api/mcp/setup

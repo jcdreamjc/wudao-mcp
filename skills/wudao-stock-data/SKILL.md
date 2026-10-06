@@ -1,7 +1,7 @@
 ---
 name: wudao-stock-data
 version: "1.0.0"
-description: "Use Wudao Data when an AI Agent needs read-only A-share market data through MCP: market overview, stock/index/ETF/convertible-bond data, K-line data, limit-up ladder, sector rotation, capital flow, Dragon Tiger List, research reports and post-market review workflows."
+description: "Use Wudao Data when an AI Agent needs A-share market data through MCP: market overview, stock/index/ETF/convertible-bond data, K-line data, limit-up ladder, sector rotation, capital flow, Dragon Tiger List, research reports and post-market review workflows."
 metadata:
   openclaw:
     emoji: "悟"
@@ -13,7 +13,7 @@ metadata:
 
 Use this Skill when the user wants to connect WorkBuddy, Codex, Claude, Cursor, OpenClaw, Hermes, Doubao/Coze-style workflows or a custom AI Agent to A-share stock data.
 
-Wudao Data is a read-only MCP Server for A-share market research and review workflows. It is designed for data lookup, market review, watchlist observation and research summaries. It does not execute trades or provide investment advice.
+Wudao Data is an MCP Server for A-share market research and review workflows: 57 read-only query tools plus 6 tools that manage the caller's own watchlist. It is designed for data lookup, market review, watchlist observation and research summaries. It does not execute trades or provide investment advice.
 
 ## MCP Server
 
@@ -72,11 +72,14 @@ Use Wudao Data for questions such as:
 Wudao Data covers:
 
 - Market data: stock search, K-line data, minute data, market overview, trading calendar, index market, ETF market and convertible-bond market
-- Limit-up ecosystem: limit-up ladder, limit-up filter, broken limit-up, limit-down, approaching limit-up, limit statistics, hot sectors
-- Capital flow and sectors: capital flow, sector analysis, concept ranking, concept stocks, anomaly detection
+- Limit-up ecosystem: limit-up ladder, limit-up filter, broken limit-up, limit-down, approaching limit-up, limit statistics, limit events, board-break analysis, short-term sentiment
+- Capital flow and sectors: capital flow, intraday main flow, theme strength and constituents, sector analysis, stock screener, anomaly detection
 - Market intelligence: smart hotlist, news hotlist, CLS news, research reports, auction data, briefings, Dragon Tiger List
 - Fundamentals: valuation snapshot, financial summary, shareholder structure
-- Workflows: market replay, stock research, limit-up review, theme research
+- Call auction: market scan, opening snapshot, theme strength, auction details
+- Events and disclosures: company events, unlocks, catalysts, macro calendar, official announcements and investor Q&A, SEC filings
+- Workflows: market replay, stock research, limit-up review
+- Watchlist: read, add, remove and organise the caller's own watchlist
 
 ## Agent Behavior
 
@@ -85,8 +88,9 @@ When MCP is available:
 1. Prefer Wudao Data MCP tools over scraping web pages.
 2. Use `tools/list` before inventing tool names or parameters.
 3. Start with workflow-level tools for broad market review.
-4. Drill into atomic tools only when the user asks for details.
-5. Keep responses as research summaries, not trading instructions.
+4. Use watchlist write tools only when the user explicitly asks to change the watchlist.
+5. Drill into atomic tools only when the user asks for details.
+6. Keep responses as research summaries, not trading instructions.
 
 When MCP is not available:
 
@@ -107,4 +111,4 @@ https://stock.quicktiny.cn/api/mcp?profile=workflows
 
 ## Safety
 
-Wudao Data is read-only. It does not execute trades, place orders, provide investment advice or promise returns.
+Only the watchlist tools write, and only to the caller's own watchlist. Wudao Data does not execute trades, place orders, provide investment advice or promise returns.

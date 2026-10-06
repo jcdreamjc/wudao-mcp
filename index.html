@@ -349,7 +349,7 @@
         <div>
           <div class="eyebrow">A股 MCP Server / AI Agent tools / 股票数据接口</div>
           <h1>把 A股数据交给 AI Agent 稳定调用</h1>
-          <p class="lead">悟道数据 MCP Server 面向 WorkBuddy、Codex、Claude、Cursor、OpenClaw、Hermes 和自建 Agent，提供 63 个只读 A股数据工具，覆盖股票行情、指数/ETF/可转债、涨停梯队、集合竞价、题材热度、资金流向、公司事件/风险日历、宏观财经日历、短线催化日历、基本面、官方披露、海外披露、工作流和自选股管理。支持远程 MCP 的客户端通过 <code>tools/list</code> 发现 schema，再用 <code>tools/call</code> 获取结构化结果；豆包、扣子等环境若不支持远程 MCP，需要通过 HTTP 工具或自建适配层接入。</p>
+          <p class="lead">悟道数据 MCP Server 面向 WorkBuddy、Codex、Claude、Cursor、OpenClaw、Hermes 和自建 Agent，提供 63 个 A股数据工具，覆盖股票行情、指数/ETF/可转债、涨停梯队、集合竞价、题材热度、资金流向、公司事件/风险日历、宏观财经日历、短线催化日历、基本面、官方披露、海外披露、工作流和自选股管理。支持远程 MCP 的客户端通过 <code>tools/list</code> 发现 schema，再用 <code>tools/call</code> 获取结构化结果；豆包、扣子等环境若不支持远程 MCP，需要通过 HTTP 工具或自建适配层接入。</p>
           <div class="hero-actions">
             <a class="button primary" href="https://stock.quicktiny.cn/developer">创建 API Key</a>
             <a class="button" href="https://data.quicktiny.cn/agent-discovery.html">Agent 发现说明</a>
@@ -398,13 +398,13 @@
       <div class="wrap">
         <div class="section-head">
           <h2>OpenClaw / Hermes / Agent 接入</h2>
-          <p>这类长期运行的 Agent 更需要稳定、只读、可审计的数据工具。悟道数据 MCP 可以作为 WorkBuddy、Codex、OpenClaw、Hermes、Claude、Cursor 和自建 Agent 的 A股数据源；豆包、扣子类工作流可在平台支持远程 MCP 时直接连接，否则通过 HTTP 工具或适配层接入。</p>
+          <p>这类长期运行的 Agent 更需要稳定、可审计的数据工具。悟道数据 MCP 可以作为 WorkBuddy、Codex、OpenClaw、Hermes、Claude、Cursor 和自建 Agent 的 A股数据源；豆包、扣子类工作流可在平台支持远程 MCP 时直接连接，否则通过 HTTP 工具或适配层接入。</p>
         </div>
         <div class="grid">
           <article class="card">
             <span class="badge red">OpenClaw</span>
             <h3>OpenClaw 股票数据 MCP</h3>
-            <p>把悟道数据配置为 OpenClaw 的只读 A股数据工具层，用于盘后复盘、盘中观察和个股研究。</p>
+            <p>把悟道数据配置为 OpenClaw 的 A股数据工具层，用于盘后复盘、盘中观察和个股研究。</p>
             <p><a href="https://data.quicktiny.cn/openclaw-stock-data-mcp.html">查看 OpenClaw 接入方案</a></p>
           </article>
           <article class="card">
@@ -466,7 +466,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2>工具能力</h2>
-          <p>当前能力覆盖 63 个 A股工具。工具名称就是 MCP <code>tools/call</code> 的 <code>name</code>，实际工具列表以 <code>tools/list</code> 和线上 manifest 为准。</p>
+          <p>当前能力覆盖 63 个工具：57 个只读查询，6 个管理用户本人自选股。工具名称就是 MCP <code>tools/call</code> 的 <code>name</code>，实际工具列表以 <code>tools/list</code> 和线上 manifest 为准。</p>
         </div>
         <div class="tools">
           <article class="tool-row">
@@ -477,12 +477,12 @@
           <article class="tool-row">
             <span class="badge red">wudao-limitup</span>
             <h3>涨停板与情绪</h3>
-            <p><code>limit_up_ladder</code> <code>limit_up_filter</code> <code>limit_up_premium</code> <code>broken_limit_up</code> <code>limit_down</code> <code>approaching_limit_up</code> <code>limit_stats</code> <code>hot_sectors</code> <code>limit_events</code></p>
+            <p><code>limit_up_ladder</code> <code>limit_up_filter</code> <code>limit_up_premium</code> <code>broken_limit_up</code> <code>limit_down</code> <code>approaching_limit_up</code> <code>limit_stats</code> <code>limit_events</code> <code>limit_event_summary</code> <code>board_break_analysis</code> <code>short_term_emotion</code></p>
           </article>
           <article class="tool-row">
             <span class="badge">wudao-analysis</span>
             <h3>资金与板块分析</h3>
-            <p><code>anomaly_detection</code> <code>capital_flow</code> <code>sector_analysis</code> <code>concept_ranking</code> <code>concept_stocks</code></p>
+            <p><code>anomaly_detection</code> <code>capital_flow</code> <code>sector_analysis</code> <code>theme_intraday_capital</code> <code>theme_stocks</code> <code>intraday_main_flow</code> <code>stock_screener</code></p>
           </article>
           <article class="tool-row">
             <span class="badge green">wudao-intel</span>
