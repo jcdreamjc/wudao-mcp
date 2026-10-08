@@ -40,9 +40,11 @@ Cursor, WorkBuddy and other clients configured with JSON:
 }
 ```
 
+Coze (扣子): in the resource library create a plugin, set the type to **MCP** and the plugin URL to `https://stock.quicktiny.cn/api/mcp`. Choose authorization **Service token / API key**, location **Header**, parameter name `X-API-Key`, and paste your key as the value. Confirming imports the tools; publishing keeps the plugin inside your own workspace. Step-by-step: [Coze guide](https://data.quicktiny.cn/coze-a-share-data-source.html#setup).
+
 Then ask the agent to call `trading_calendar` with `date="2026-09-04"`; it should return `isTradingDay: true`.
 
-Tested on 2026-10-06 with Claude Code 2.1.284: tool discovery, `trading_calendar` and `limit_up_ladder` returned structured results. The Codex command follows `codex mcp add --help` in Codex CLI 0.130.0. Other clients use the standard remote HTTP configuration and were not each tested end to end. WorkBuddy steps: [WorkBuddy guide](https://data.quicktiny.cn/workbuddy-stock-data-mcp.html).
+Tested on 2026-10-06 with Claude Code 2.1.284: tool discovery, `trading_calendar` and `limit_up_ladder` returned structured results. Tested on 2026-10-08 in Coze: the MCP plugin imported the tools and a `trading_calendar` trial run returned data. The Codex command follows `codex mcp add --help` in Codex CLI 0.130.0. Other clients use the standard remote HTTP configuration and were not each tested end to end. WorkBuddy steps: [WorkBuddy guide](https://data.quicktiny.cn/workbuddy-stock-data-mcp.html).
 
 ## Pricing and limits
 
